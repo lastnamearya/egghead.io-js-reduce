@@ -1,17 +1,21 @@
-// Flatting nested objects using map and reduce.
+// Counting instances of values in an object like how many times particular property occurs.
 
-const nestedArray = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+const namesArray = ["Alice", "Bob", "Tiff", "Bruce", "Alice", "Bob", "Alice"];
 
-// My current approach through map
+const resultArray = namesArray.reduce(function(accumulator, currentValue) {
+  // Here it's written first but executed later after else, If there's currentValue property already exists in accumulator which has value of 1. If we found it then we increased it by 1.
 
-const result = nestedArray.map(({ id }) => id);
+  if (currentValue in accumulator) {
+    accumulator[currentValue]++;
+  } else {
+    // Here we first add the curretValue property to accumualator and set it value to 1.
 
-console.log(result);
+    accumulator[currentValue] = 1;
+  }
 
-// New approach using ~ reduce
+  // In last we return our accumulator Object. Why object ~ because we explicity passed empty object as an initial value for the accumulator.
 
-const reduceResult = nestedArray.reduce(function(accumulator, currentValue) {
-  return accumulator.concat(currentValue.id);
-}, []);
+  return accumulator;
+}, {});
 
-console.log(reduceResult);
+console.log(resultArray);
