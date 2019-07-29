@@ -13,3 +13,15 @@ var sum = data.reduce(function(accumulator, currentValue) {
 // It'll return 10
 
 console.log(sum);
+
+var tally = data.reduce(function(accumulator, curretnValue) {
+  if (accumulator[curretnValue]) {
+    accumulator[curretnValue]++;
+  } else {
+    accumulator[curretnValue] = 1;
+  }
+
+  return accumulator;
+});
+
+console.log(tally);
