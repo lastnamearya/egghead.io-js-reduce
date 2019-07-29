@@ -1,9 +1,20 @@
-// Counting instances of values in an object like how many times particular property occurs.
+// Practice ~ Count Instances ~ like getting votes and summarizing the results.
 
-const namesArray = ["Alice", "Bob", "Tiff", "Bruce", "Alice", "Bob", "Alice"];
+const votes = [
+  "ember",
+  "angular",
+  "react",
+  "angular",
+  "react",
+  "angular",
+  "vue",
+  "ember",
+  "vanilla",
+  "angular"
+];
 
-const resultArray = namesArray.reduce(function(accumulator, currentValue) {
-  if (!(currentValue in accumulator)) {
+const voteResults = votes.reduce(function(accumulator, currentValue) {
+  if (!accumulator[currentValue]) {
     accumulator[currentValue] = 1;
   } else {
     accumulator[currentValue]++;
@@ -11,4 +22,4 @@ const resultArray = namesArray.reduce(function(accumulator, currentValue) {
   return accumulator;
 }, {});
 
-console.log(resultArray);
+console.log(voteResults);
