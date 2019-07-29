@@ -1,66 +1,44 @@
-const data = [1, 2, 3];
+// Reduce complexity using reduce method and improve performance when doing operations on very Big Data
 
-// Double the value of each array element using map
+const bigData = [];
 
-const mapResult = data.map(currentValue => currentValue * 2);
+// Let's add million numbers to above Big Data Array
 
-console.log(mapResult);
+for (let i = 0; i < 1000000; i++) {
+  bigData.push(i);
+}
 
-// Double the value of each array element using reduce
+// ****************************************************** //
 
-const reduceResult = data.reduce(function(accumulator, currentValue) {
-  accumulator.push(currentValue * 2);
-  return accumulator;
-}, []);
+// Here first we're going to filter number out of a Million which are even then we double those number values.
 
-// Return an array with even Numbers
+// Using Filter and Map together ~ chained.
 
-// We here used filter to return an even Array
+console.time("bigData");
 
-const evenArray = data.filter(currentValue => currentValue % 2 === 0);
-
-console.log(evenArray);
-
-// Reduce implementation for the same ~ even values
-
-const evenReducedArray = data.reduce(function(accumulator, currentValue) {
-  if (currentValue % 2 === 0) {
-    accumulator.push(currentValue);
-  }
-  // No else here, because we only going to push currentValue to our accumulator if it's an even no.
-
-  return accumulator;
-}, []);
-
-console.log(evenReducedArray);
-
-// Filter and Double the Array for the Even Values
-
-const data2 = [1, 2, 3, 4, 5, 6];
-
-// Using filter and map together
-
-const filterMapped = data2
+const filterMapped = bigData
   .filter(currentValue => currentValue % 2 === 0)
   .map(currentValue => currentValue * 2);
 
-// It'll return [4, 8, 12] which is doubled value of [2, 4, 6]
+console.timeEnd("bigData");
 
-console.log(filterMapped);
+// Result ~ It took approx 67ms to execute the above program.
 
-// Using Reduce ~ One single reduce funtion will do the both things first it'll filter the array then it'll doubles the array. That's how it's reduced the complexity of the above program.
+// ****************************************************** //
 
-const filterReduced = data2.reduce(function(accumulator, currentValue) {
-  const t1 = performance.now();
+// Using reduce
 
+console.time("reducedData");
+
+const reducedData = bigData.reduce(function(accumulator, currentValue) {
   if (currentValue % 2 === 0) {
     accumulator.push(currentValue * 2);
   }
-  // No else clause here
+  // No else clause here.
 
   return accumulator;
 }, []);
 
-// Return same like above filterMapped result ~ [4, 8, 12]
+console.timeEnd("reducedData");
 
-console.log(filterReduced);
+// Result ~ It took approx 51ms to execute the above program using reduce. That's a 16ms performance gain over using map and filter.
