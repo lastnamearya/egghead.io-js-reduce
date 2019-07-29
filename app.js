@@ -1,44 +1,25 @@
-// Reduce complexity using reduce method and improve performance when doing operations on very Big Data
+// Find mean value of an array using reduce
 
-const bigData = [];
+const data = [1, 2, 3, 4, 5, 3, 1];
 
-// Let's add million numbers to above Big Data Array
+const mean = data.reduce(function(
+  accumulator,
+  currentValue,
+  currentIndex,
+  array
+) {
+  // Firs we create an intermediatory value i.e will be our accumulated value.
 
-for (let i = 0; i < 1000000; i++) {
-  bigData.push(i);
-}
+  let intermediatoryValue = accumulator + currentValue;
 
-// ****************************************************** //
+  // On the last when our accumulation will finished at that point our currentIndex will become the last index value of the array on which we applied our reduce function. Using that we'll fine the mean of the given array.
 
-// Here first we're going to filter number out of a Million which are even then we double those number values.
-
-// Using Filter and Map together ~ chained.
-
-console.time("bigData");
-
-const filterMapped = bigData
-  .filter(currentValue => currentValue % 2 === 0)
-  .map(currentValue => currentValue * 2);
-
-console.timeEnd("bigData");
-
-// Result ~ It took approx 67ms to execute the above program.
-
-// ****************************************************** //
-
-// Using reduce
-
-console.time("reducedData");
-
-const reducedData = bigData.reduce(function(accumulator, currentValue) {
-  if (currentValue % 2 === 0) {
-    accumulator.push(currentValue * 2);
+  if (currentIndex === array.length - 1) {
+    return intermediatoryValue / array.length;
   }
-  // No else clause here.
 
-  return accumulator;
-}, []);
+  return intermediatoryValue;
+},
+0);
 
-console.timeEnd("reducedData");
-
-// Result ~ It took approx 51ms to execute the above program using reduce. That's a 16ms performance gain over using map and filter.
+console.log(mean);
