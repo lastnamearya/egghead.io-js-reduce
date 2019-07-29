@@ -1,25 +1,15 @@
-// Find mean value of an array using reduce
+// Problem accumulate votes ~ last vote string char ~ 1 + 2 + 3
 
-const data = [1, 2, 3, 4, 5, 3, 1];
+var data = ["vote1", "vote2", "vote3", "vote4"];
 
-const mean = data.reduce(function(
-  accumulator,
-  currentValue,
-  currentIndex,
-  array
-) {
-  // Firs we create an intermediatory value i.e will be our accumulated value.
+var sum = data.reduce(function(accumulator, currentValue) {
+  // First we'll get the last character of the elment ( string ) using String.prototype.charAt method then convert that numeric string value into Number Data Type using Number(String.Prototype.charAt(index))
 
-  let intermediatoryValue = accumulator + currentValue;
+  var numericValue = currentValue.charAt([currentValue.length - 1]);
 
-  // On the last when our accumulation will finished at that point our currentIndex will become the last index value of the array on which we applied our reduce function. Using that we'll fine the mean of the given array.
+  return accumulator + Number(numericValue);
+}, 0);
 
-  if (currentIndex === array.length - 1) {
-    return intermediatoryValue / array.length;
-  }
+// It'll return 10
 
-  return intermediatoryValue;
-},
-0);
-
-console.log(mean);
+console.log(sum);
