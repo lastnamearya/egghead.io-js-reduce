@@ -1,20 +1,9 @@
-// Find the sum of Numbers in an array that are not repeated ~ Like if one number for example 2 repeated more then once then dont' add it in whole sum.
+// Flatten a nested array using Reduce.
 
-// It's sum needs to be 1 + 3 + 4 = 8
+const data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-const array = [1, 2, 2, 3, 4];
+const flatArray = data.reduce(function(accumulator, currentValue) {
+  return accumulator.concat(currentValue);
+}, []);
 
-const intermediatoryArray = [];
-
-const result = array.reduce(function(accumulator, currentValue) {
-  if (!intermediatoryArray.includes(currentValue)) {
-    intermediatoryArray.push(currentValue);
-    accumulator += currentValue;
-  } else {
-    accumulator -= currentValue;
-  }
-
-  return accumulator;
-}, 0);
-
-console.log(result);
+console.log(flatArray);
