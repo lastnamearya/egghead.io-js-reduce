@@ -1,9 +1,54 @@
-// Flatten a nested array using Reduce.
+// Problem ~ Using reduce return an array with all the cast members and only include one star once.
 
-const data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+var input = [
+  {
+    title: "Batman Begins",
+    year: 2005,
+    cast: [
+      "Christian Bale",
+      "Michael Caine",
+      "Liam Neeson",
+      "Katie Holmes",
+      "Gary Oldman",
+      "Cillian Murphy"
+    ]
+  },
+  {
+    title: "The Dark Knight",
+    year: 2008,
+    cast: [
+      "Christian Bale",
+      "Heath Ledger",
+      "Aaron Eckhart",
+      "Michael Caine",
+      "Maggie Gyllenhal",
+      "Gary Oldman",
+      "Morgan Freeman"
+    ]
+  },
+  {
+    title: "The Dark Knight Rises",
+    year: 2012,
+    cast: [
+      "Christian Bale",
+      "Gary Oldman",
+      "Tom Hardy",
+      "Joseph Gordon-Levitt",
+      "Anne Hathaway",
+      "Marion Cotillard",
+      "Morgan Freeman",
+      "Michael Caine"
+    ]
+  }
+];
 
-const flatArray = data.reduce(function(accumulator, currentValue) {
-  return accumulator.concat(currentValue);
+const result = input.reduce(function(accumulator, currentValue) {
+  currentValue.cast.forEach(star => {
+    if (accumulator.indexOf(star) === -1) {
+      accumulator.push(star);
+    }
+  });
+  return accumulator;
 }, []);
 
-console.log(flatArray);
+console.log(result);
