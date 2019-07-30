@@ -1,27 +1,20 @@
-// Problem accumulate votes ~ last vote string char ~ 1 + 2 + 3
+// Find the sum of Numbers in an array that are not repeated ~ Like if one number for example 2 repeated more then once then dont' add it in whole sum.
 
-var data = ["vote1", "vote2", "vote3", "vote4"];
+// It's sum needs to be 1 + 3 + 4 = 8
 
-var sum = data.reduce(function(accumulator, currentValue) {
-  // First we'll get the last character of the elment ( string ) using String.prototype.charAt method then convert that numeric string value into Number Data Type using Number(String.Prototype.charAt(index))
+const array = [1, 2, 2, 3, 4];
 
-  var numericValue = currentValue.charAt([currentValue.length - 1]);
+const intermediatoryArray = [];
 
-  return accumulator + Number(numericValue);
-}, 0);
-
-// It'll return 10
-
-console.log(sum);
-
-var tally = data.reduce(function(accumulator, curretnValue) {
-  if (accumulator[curretnValue]) {
-    accumulator[curretnValue]++;
+const result = array.reduce(function(accumulator, currentValue) {
+  if (!intermediatoryArray.includes(currentValue)) {
+    intermediatoryArray.push(currentValue);
+    accumulator += currentValue;
   } else {
-    accumulator[curretnValue] = 1;
+    accumulator -= currentValue;
   }
 
   return accumulator;
-});
+}, 0);
 
-console.log(tally);
+console.log(result);
