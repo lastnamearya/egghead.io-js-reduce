@@ -1,61 +1,56 @@
-/* Find the sum of Numbers in an array that are not repeated ~ Like if one number for example 2 repeated more then once then dont' add it in whole sum.
+// Find Intersection between Array.
 
-*/
+function intersection() {
+  const argumentsArray = Array.from(arguments);
 
-const sampleArray = [1, 2, 2, 3, 2, 4];
+  const sortedArray = argumentsArray.sort(function(a, b) {
+    return a.length - b.length;
+  });
 
-// Right Solution ~ My non-optimized Solution
+  const resultArray = [];
 
-const intermediatoryArray = [];
-const duplicateArray = [];
+  const smallestArray = sortedArray[0];
 
-const newResult = sampleArray.reduce(function(
-  accumulator,
-  currentValue,
-  index,
-  array
-) {
-  if (intermediatoryArray.indexOf(currentValue) === -1) {
-    intermediatoryArray.push(currentValue);
-  } else {
-    duplicateArray.push(currentValue);
-  }
+  // i = 1, We'll skip the first smallest Array and starts with other array after that.
 
-  if (index === array.length - 1) {
-    intermediatoryArray.forEach(value => {
-      if (duplicateArray.indexOf(value) === -1) {
-        accumulator += value;
+  for (let i = 1; i < sortedArray.length; i++) {
+    // Second we execute a new loop on every nested array to check if the nested array element includes in the smallestArray or not.
+    for (let j = 0; j < sortedArray[i].length; j++) {
+      if (smallestArray.includes(sortedArray[i][j])) {
+        const value = sortedArray[i][j];
+        // Then we also have to check for If it's include in other arrays as well. If it's then we push it to our results Array.
+
+        // length ~ Hook to check if it's included in all nested arrays.
+
+        let length = 0;
+
+        // We update our length value based on if it includes in other nested arrays
+
+        for (let k = 1; k < sortedArray.length; k++) {
+          if (sortedArray[k].includes(value)) {
+            length += 1;
+          }
+          // No else clause here.
+        }
+
+        // When our length becomes equal to sortedArray length - 1 . Why - 1 because we're not operating on smallest Array. Then we push it to our result and we only push uniqe values that's are not already in the result array.
+
+        if (length === sortedArray.length - 1) {
+          if (!resultArray.includes(value)) {
+            resultArray.push(value);
+          }
+          // No else clause here.
+        }
+        // No else clause here.
       }
-    });
+    }
   }
 
-  return accumulator;
-},
-0);
+  // finally we'll return our resultArray
 
-console.log(newResult);
+  return resultArray;
+}
 
-// **************************************************** //
-
-/* Old Solution ~ This is not correct solution because it'll break when we apply it for values [1, 2, 3, 2, 2, 4] ~ When a element repeated odd no of times like 3. It'l break.
-
-*/
-
-// It's sum needs to be 1 + 3 + 4 = 8
-
-// const intermediatoryArray = [];
-
-// const result = array.reduce(function(accumulator, currentValue) {
-//   if (!intermediatoryArray.includes(currentValue)) {
-//     intermediatoryArray.push(currentValue);
-//     accumulator += currentValue;
-//   } else {
-//     accumulator -= currentValue;
-//   }
-
-//   return accumulator;
-// }, 0);
-
-// // It'll be 6 rather than 8.
-
-// console.log(result);
+console.log(
+  intersection([5, 10, 15, 1, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
+);
