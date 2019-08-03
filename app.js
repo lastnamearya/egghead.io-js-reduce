@@ -1,5 +1,25 @@
 // Find Intersection between Array.
 
+// Optimzed Solution with reduce ~ 0.003 ms
+
+function intersectionWithReduce() {
+  const argumentsArray = Array.from(arguments);
+
+  return argumentsArray.reduce(function(accumulator, currentValue) {
+    return accumulator.filter(function(number) {
+      return currentValue.indexOf(number) !== -1;
+    });
+  });
+}
+
+console.log(
+  intersectionWithReduce([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
+);
+
+// ******************************************************** //
+
+// My old Solution ~ 0.005 ms
+
 function intersection() {
   const argumentsArray = Array.from(arguments);
 
@@ -52,5 +72,5 @@ function intersection() {
 }
 
 console.log(
-  intersection([5, 10, 15, 1, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
+  intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 );
