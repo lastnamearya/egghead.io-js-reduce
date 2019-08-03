@@ -4,19 +4,17 @@
 
 const sampleArray = [1, 2, 2, 3, 2, 4];
 
-// New Solution a little optimized then below solution
+// Set ~ removed only duplicatedValues Array we'll use.
 
 function arraySum(array) {
-  // First we'll get a clean non-duplicated integers array ~ [1, 2, 3, 4]
-  const cleanArray = Array.from(new Set(array));
-
   // Duplicate Array ~ Hold duplicate integers that occurs more than one time ~ [2, 2]
-  const duplicatedArray = array.filter(
-    (num, index) => array.indexOf(num) !== index
-  );
 
-  return cleanArray.reduce(function(accumulator, currentValue) {
-    if (duplicatedArray.indexOf(currentValue) === -1) {
+  return array.reduce(function(accumulator, currentValue) {
+    const duplicatedValues = array.filter(
+      (num, index) => array.indexOf(num) !== index
+    );
+
+    if (duplicatedValues.indexOf(currentValue) === -1) {
       accumulator += currentValue;
     }
     return accumulator;
