@@ -1,11 +1,28 @@
-// reduceRight ~ Now our accumulation will starts from right to left. Default accumulation will be from left to right. It's handy and good to have in our Toolbox.
+// Reactive Programming.
 
-const data = [1, 2, 3, 4, "5"];
+// Pipeline ~ Composing functions with reduce
 
-// result will be ~ 054321 ( String )
+function increment(input) {
+  return input + 1;
+}
+function decrement(input) {
+  return input - 1;
+}
+function double(input) {
+  return input * 2;
+}
+function halve(input) {
+  return input / 2;
+}
 
-const result = data.reduceRight(function(accumulator, currentValue) {
-  return accumulator + currentValue;
-}, 0);
+// A series of functions that get applied some initial value in order to return some final value and this pipeline can be invoked as just single function.
+
+const pipeline = [increment, double, decrement];
+
+const initialValue = 1;
+
+const result = pipeline.reduce(function(accumulator, currentFunc) {
+  return currentFunc(accumulator);
+}, initialValue);
 
 console.log(result);
