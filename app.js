@@ -1,6 +1,6 @@
 // Problem ~ Using reduce return an array with all the cast members and only include one star once.
 
-var input = [
+const data = [
   {
     title: "Batman Begins",
     year: 2005,
@@ -42,11 +42,13 @@ var input = [
   }
 ];
 
-const result = input.reduce(function(accumulator, currentValue) {
+const result = data.reduce(function(accumulator, currentValue) {
   currentValue.cast.forEach(star => {
+    // if idexOf === -1, It means star is not included in the array itself.
     if (accumulator.indexOf(star) === -1) {
       accumulator.push(star);
     }
+    // No else here ~ because we're only going to add those stars which are not inluded in the accumulator.
   });
   return accumulator;
 }, []);
