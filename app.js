@@ -1,55 +1,32 @@
-var luke = {
-  name: "luke skywalker",
-  jedi: true,
-  parents: {
-    father: {
-      jedi: true
-    },
-    mother: {
-      jedi: false
-    }
-  }
+/*
+
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+
+*/
+
+const inputArray = [2, 7, 11, 15];
+const targetValue = 9;
+
+// Solution
+
+const twoSum = function(nums, target) {
+  return nums.reduce(function(accumulator, currentValue, currentIndex, array) {
+    array.forEach((value, index) => {
+      if (index !== currentIndex && currentValue + value === target) {
+        accumulator.push(currentIndex);
+      }
+    });
+    return accumulator;
+  }, []);
 };
 
-var han = {
-  name: "han solo",
-  jedi: false,
-  parents: {
-    father: {
-      jedi: false
-    },
-    mother: {
-      jedi: false
-    }
-  }
-};
-
-var anakin = {
-  name: "anakin skywalker",
-  jedi: true,
-  parents: {
-    mother: {
-      jedi: false
-    }
-  }
-};
-
-var characters = [luke, han, anakin];
-
-function fatherWasJedi(character) {
-  var path = "parents.father.jedi";
-  return path.split(".").reduce(function(obj, field) {
-    if (obj) {
-      return obj[field];
-    }
-
-    return false;
-  }, character);
-}
-
-characters.forEach(function(character) {
-  console.log(
-    character.name + "'s father was a jedi:",
-    fatherWasJedi(character)
-  );
-});
+console.log(twoSum(inputArray, targetValue));
